@@ -1,6 +1,5 @@
 ---
 ---
-@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding:400')
 
 * {
   -webkit-box-sizing: border-box;
@@ -15,7 +14,7 @@ body {
 }
 
 html {
-  font-family: "Nanum Gothic Coding", "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 18px;
   font-weight: 300;
   line-height: 1.6;
@@ -373,8 +372,6 @@ tbody tr:nth-child(odd) th {
   }
 }
 
-
-/*kiko highlight style*/
 .highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #999988; font-style: italic } /* Comment */
 .highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
@@ -436,4 +433,3 @@ tbody tr:nth-child(odd) th {
 .highlight .vg { color: #008080 } /* Name.Variable.Global */
 .highlight .vi { color: #008080 } /* Name.Variable.Instance */
 .highlight .il { color: #009999 } /* Literal.Number.Integer.Long */
-
