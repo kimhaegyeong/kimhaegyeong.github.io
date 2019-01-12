@@ -6,7 +6,8 @@ categories: jekyll
 ---
 
 
-![테스트 이미지]({{ "/assets/2019-01-05-workbench-user-and-privileges.jpg"}})
+![테스트 이미지]({{ "assets/2019-01-05-workbench-user-and-privileges.jpg"}})
 
 
-
+![테스트 이미지]({{ "assets/thumbs-up.png"}})
+designed by turkkub from Flaticon
