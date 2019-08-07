@@ -1,0 +1,974 @@
+
+# 2019.08.07 세번째 강의
+
+
+```sh
+# docker search
+[root@vm1 ~]# docker search ubuntu
+NAME                                                      DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED
+ubuntu                                                    Ubuntu is a Debian-based Linux operating sys…   9802                [OK]      
+dorowu/ubuntu-desktop-lxde-vnc                            Docker image to provide HTML5 VNC interface …   330                                     [OK]
+rastasheep/ubuntu-sshd                                    Dockerized SSH service, built on top of offi…   226                                     [OK]
+consol/ubuntu-xfce-vnc                                    Ubuntu container with "headless" VNC session…   185                                     [OK]
+ubuntu-upstart                                            Upstart is an event-based replacement for th…   99                  [OK]      
+ansible/ubuntu14.04-ansible                               Ubuntu 14.04 LTS with ansible                   97                                      [OK]
+1and1internet/ubuntu-16-nginx-php-phpmyadmin-mysql-5      ubuntu-16-nginx-php-phpmyadmin-mysql-5          50                                      [OK]
+ubuntu-debootstrap                                        debootstrap --variant=minbase --components=m…   40                  [OK]      
+i386/ubuntu                                               Ubuntu is a Debian-based Linux operating sys…   18                            
+1and1internet/ubuntu-16-apache-php-5.6                    ubuntu-16-apache-php-5.6                        14                                      [OK]
+ppc64le/ubuntu                                            Ubuntu is a Debian-based Linux operating sys…   13                            
+1and1internet/ubuntu-16-apache-php-7.0                    ubuntu-16-apache-php-7.0                        13                                      [OK]
+eclipse/ubuntu_jdk8                                       Ubuntu, JDK8, Maven 3, git, curl, nmap, mc, …   11                                      [OK]
+1and1internet/ubuntu-16-nginx-php-phpmyadmin-mariadb-10   ubuntu-16-nginx-php-phpmyadmin-mariadb-10       11                                      [OK]
+1and1internet/ubuntu-16-nginx-php-5.6                     ubuntu-16-nginx-php-5.6                         8                                       [OK]
+1and1internet/ubuntu-16-nginx-php-5.6-wordpress-4         ubuntu-16-nginx-php-5.6-wordpress-4             7                                       [OK]
+1and1internet/ubuntu-16-apache-php-7.1                    ubuntu-16-apache-php-7.1                        6                                       [OK]
+darksheer/ubuntu                                          Base Ubuntu Image -- Updated hourly             5                                       [OK]
+1and1internet/ubuntu-16-nginx-php-7.0                     ubuntu-16-nginx-php-7.0                         4                                       [OK]
+1and1internet/ubuntu-16-apache-php-5.6-zend-2             ubuntu-16-apache-php-5.6-zend-2                 2                                       [OK]
+pivotaldata/ubuntu                                        A quick freshening-up of the base Ubuntu doc…   2                             
+1and1internet/ubuntu-16-php-7.1                           ubuntu-16-php-7.1                               1                                       [OK]
+1and1internet/ubuntu-16-sshd                              ubuntu-16-sshd                                  1                                       [OK]
+smartentry/ubuntu                                         ubuntu with smartentry                          1                                       [OK]
+pivotaldata/ubuntu-gpdb-dev                               Ubuntu images for GPDB development              0                             
+
+
+# 특정버전의 우툰투 검색
+[root@vm1 ~]# docker search ubuntu:16.04
+NAME                                 DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED
+fuyuanli/xampp                       XAMPP based on Ubuntu:16.04                     4
+jaehyeon/r-java                      r docker image from ubuntu:16.04 (r-base, r-…   3                                       [OK]
+rocm/dev-ubuntu-16.04                Docker image based on Ubuntu:16.04 with the …   2
+netdodo/android-emulator             Android-emulator API-25 with armeabi-v7a ima…   1                                       [OK]
+jaehyeon/r-basic                     r docker image from ubuntu:16.04 (r-base, r-…   1                                       [OK]
+islandsound/vowpal_wabbit            vowpal_wabbit 8.0.5 FROM ubuntu:16.04           1
+abienkowski/jnlp-slave               Based on jenkins/jnlp-slave and ubuntu:16.04…   1                                       [OK]
+beeven/docker-sqlcmd                 sqlcmd run on top of ubuntu:16.04               1                                       [OK]
+hasarden/ubuntu-integration          ubuntu:16.04 with docker and dotnet-sdk         0
+akatiyar/ros-py-base                 ROS Kinetic base with python image based off…   0                                       [OK]
+tecposter/nginx                      Nginx build from source code on Ubuntu:16.04    0                                       [OK]
+fizzymatt/nessus-7-ubuntu            Nessus version 7.0.1 (unlicensed). Uses Ubun…   0
+moritzf/virtualhere                  Auto-Updating Docker image based on ubuntu:1…   0                                       [OK]
+cosmiqworks/spacenet-utilities-cpu   CPU Docker Container for SpaceNetUtilities B…   0                                       [OK]
+chhuang/docker_image_filebeat        build filebeat image based on ubuntu:16.04      0                                       [OK]
+insready/nginx                       A folk from the official nginx library. This…   0                                       [OK]
+ptpadan1246/ubuntu-node-go           base image is ubuntu:16.04 golang nodejs pyt…   0                                       [OK]
+c6prmk/r-base-dev                    Based on ubuntu:16.04 (wget, curl, git)         0                                       [OK]
+roongr2k7/google-chrome              ubuntu:16.04, google-chrome-stable              0                                       [OK]
+rightscale/ops_java_base             A base image based on ubuntu:16.04 that for …   0
+cristo/password_manager              Password_storage on Ubuntu:16.04                0                                       [OK]
+wtanaka/ubuntu-1604                  ubuntu:16.04 with apt-get update and apt-get…   0                                       [OK]
+acntechie/openldap                   Docker image with OpenLDAP and phpLDAPadmin,…   0                                       [OK]
+sungsu7437/ubuntu_spark              install spark in ubuntu:16.04                   0                                       [OK]
+vkushnir/oracle-instantclient        Oracle Instantclient on Ubuntu:16.04 Docker …   0
+
+
+# docker search [id]
+
+
+[root@vm1 ~]# docker pull --help
+
+Usage:  docker pull [OPTIONS] NAME[:TAG|@DIGEST]
+
+Pull an image or a repository from a registry
+
+Options:
+  -a, --all-tags                Download all tagged images in the repository
+      --disable-content-trust   Skip image verification (default true)
+  -q, --quiet                   Suppress verbose output
+
+
+
+[root@vm1 ~]# docker image pull fedora
+Using default tag: latest
+latest: Pulling from library/fedora
+
+
+[root@vm1 ~]# docker image ls
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+fedora              latest              ef49352c9c21        5 days ago          246MB
+ubuntu              latest              3556258649b2        2 weeks ago         64.2MB
+busybox             latest              db8ee88ad75f        2 weeks ago         1.22MB
+httpd               latest              ee39f68eb241        3 weeks ago         154MB
+alpine              latest              b7b28af77ffe        3 weeks ago         5.58MB
+centos              latest              9f38484d220f        4 months ago        202MB
+```
+
+
+
+### Custom Docker Image 생성
+
+```sh
+# mycentos 이름을 가진 도커 컨테이너 실행
+[root@vm3 ~]# docker run --name mycentos  -it centos
+
+# 기본 컨테이너에서 수정
+[root@3fee6ef843e5 /]# mkdir /mydata
+[root@3fee6ef843e5 /]# touch /mydata
+[root@3fee6ef843e5 /]# touch /mydata/mysecret.data
+[root@3fee6ef843e5 /]# echo "This is my secret data " > /mydata/mysecret.data
+[root@3fee6ef843e5 /]# cat /mydata/mysecret.data
+This is my secret data
+[root@3fee6ef843e5 /]# ls -l /mydata/
+total 4
+-rw-r--r-- 1 root root 24 Aug  7 10:44 mysecret.data
+
+# 컨테이너 종료
+[root@3fee6ef843e5 /]# exit
+exit
+[root@vm3 ~]# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+# mycentos 컨테이너 상태를 wedimg 이미지로 
+[root@vm3 ~]# docker commit mycentos wedimg
+sha256:efabe874109c906d3569782b96deeac9f8f14891608720e0df171a2a92fcd478
+[root@vm3 ~]# docker image ls
+REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE
+wedimg                      latest              efabe874109c        11 seconds ago      202MB
+ubuntu                      latest              3556258649b2        2 weeks ago         64.2MB
+httpd                       latest              ee39f68eb241        3 weeks ago         154MB
+alpine                      latest              b7b28af77ffe        3 weeks ago         5.58MB
+centos                      latest              9f38484d220f        4 months ago        202MB
+pengbai/docker-supermario   latest              49beaba1c5cc        13 months ago       686MB
+
+[root@vm3 ~]# docker run -it --name con1 wedimg
+[root@42d7c7d2f343 /]# ls -l /mydata/
+total 4
+-rw-r--r-- 1 root root 24 Aug  7 10:44 mysecret.data
+[root@42d7c7d2f343 /]# exit
+exit
+
+[root@vm3 ~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND              CREATED             STATUS                          PORTS               NAMES
+42d7c7d2f343        wedimg              "/bin/bash"          27 seconds ago      Exited (0) 15 seconds ago                           con1
+3fee6ef843e5        centos              "/bin/bash"          2 minutes ago       Exited (0) About a minute ago                       mycentos
+4a6b6ae1aecc        centos              "/bin/bash"          3 minutes ago       Exited (0) 3 minutes ago                            vigilant_bassi
+91c39ed5cce6        httpd               "httpd-foreground"   23 hours ago        Exited (0) 22 hours ago                             funny_feynman
+
+[root@vm3 ~]# docker rm $(docker ps -aq) -f
+42d7c7d2f343
+3fee6ef843e5
+4a6b6ae1aecc
+91c39ed5cce6
+
+[root@vm3 ~]# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+[root@vm3 ~]# docker images
+REPOSITORY                  TAG                 IMAGE ID            CREATED              SIZE
+wedimg                      latest              efabe874109c        About a minute ago   202MB
+ubuntu                      latest              3556258649b2        2 weeks ago          64.2MB
+httpd                       latest              ee39f68eb241        3 weeks ago          154MB
+alpine                      latest              b7b28af77ffe        3 weeks ago          5.58MB
+centos                      latest              9f38484d220f        4 months ago         202MB
+pengbai/docker-supermario   latest              49beaba1c5cc        13 months ago        686MB
+[root@vm3 ~]#
+[root@vm3 ~]# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+[root@vm3 ~]# docker images
+REPOSITORY                  TAG                 IMAGE ID            CREATED              SIZE
+wedimg                      latest              efabe874109c        About a minute ago   202MB
+ubuntu                      latest              3556258649b2        2 weeks ago          64.2MB
+httpd                       latest              ee39f68eb241        3 weeks ago          154MB
+alpine                      latest              b7b28af77ffe        3 weeks ago          5.58MB
+centos                      latest              9f38484d220f        4 months ago         202MB
+pengbai/docker-supermario   latest              49beaba1c5cc        13 months ago        686MB
+
+
+# docker hub에 올리기 위해 자신의 아이디/이미지 명으로 tag를 붙임
+[root@vm3 ~]# docker tag wedimg schema9/wedimg
+[root@vm3 ~]# docker images
+REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE
+wedimg                      latest              efabe874109c        2 minutes ago       202MB
+schema9/wedimg              latest              efabe874109c        2 minutes ago       202MB
+ubuntu                      latest              3556258649b2        2 weeks ago         64.2MB
+httpd                       latest              ee39f68eb241        3 weeks ago         154MB
+alpine                      latest              b7b28af77ffe        3 weeks ago         5.58MB
+centos                      latest              9f38484d220f        4 months ago        202MB
+pengbai/docker-supermario   latest              49beaba1c5cc        13 months ago       686MB
+
+
+# docker hub 로그인
+# docker login -u [사용자 아이디]
+[root@vm3 ~]# docker login -u schema9
+Password:
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+
+# 이미지 업로드
+# docker push [아이디]/[이미지명]
+[root@vm3 ~]# docker push schema9/wedimg
+The push refers to repository [docker.io/schema9/wedimg]
+2f5919e144d3: Pushed
+d69483a6face: Mounted from library/centos
+latest: digest: sha256:a6133acb6671977d3784481944e4d2d3e1ff3e4e2dff66768611dde4f733af2a size: 736
+
+[root@vm3 ~]# docker images
+REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE
+schema9/wedimg              latest              efabe874109c        6 minutes ago       202MB
+wedimg                      latest              efabe874109c        6 minutes ago       202MB
+ubuntu                      latest              3556258649b2        2 weeks ago         64.2MB
+httpd                       latest              ee39f68eb241        3 weeks ago         154MB
+alpine                      latest              b7b28af77ffe        3 weeks ago         5.58MB
+centos                      latest              9f38484d220f        4 months ago        202MB
+pengbai/docker-supermario   latest              49beaba1c5cc        13 months ago       686MB
+```
+
+
+### Custom Docker imgage 다운로드 후 실행
+```sh
+# 커스텀된 도커 이미지 다운로드
+[root@vm2 ~]# docker pull schema9/wedimg
+Using default tag: latest
+latest: Pulling from schema9/wedimg
+8ba884070f61: Already exists
+bb85c3b2eeb5: Pull complete
+Digest: sha256:a6133acb6671977d3784481944e4d2d3e1ff3e4e2dff66768611dde4f733af2a
+Status: Downloaded newer image for schema9/wedimg:latest
+docker.io/schema9/wedimg:latest
+
+# 다운로드 받은 이미지 실행
+[root@vm2 ~]# docker run -it schema9/wedimg
+
+# 커스텀된 내역 확인
+[root@8848e4b8014f /]# ls -l /mydata/
+total 4
+-rw-r--r-- 1 root root 24 Aug  7 10:44 mysecret.data
+```
+
+
+
+### docker image save
+```sh
+[root@vm2 ~]# docker images
+REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE
+schema9/wedimg              latest              efabe874109c        51 minutes ago      202MB
+ysleeimg                    latest              7326f31e4370        23 hours ago        313MB
+ubuntu                      latest              3556258649b2        2 weeks ago         64.2MB
+alpine                      latest              b7b28af77ffe        3 weeks ago         5.58MB
+centos                      latest              9f38484d220f        4 months ago        202MB
+pengbai/docker-supermario   latest              49beaba1c5cc        13 months ago       686MB
+
+# 이미지를 tar 파일로 저장
+[root@vm2 ~]# docker image save schema9/wedimg > wedimg.tar
+[root@vm2 ~]# ls -l
+total 204600
+-rw-------. 1 root root      1417 Aug  5 07:26 anaconda-ks.cfg
+-rw-r--r--  1 root root 209504256 Aug  7 07:37 wedimg.tar
+
+# vm1로 전송
+[root@vm2 ~]# scp wedimg.tar vm1:/root
+root@vm1's password:
+wedimg.tar     
+
+# vm1에서 확인
+[root@vm1 ~]# ls -l
+total 204600
+-rw-------. 1 root root      1417 Aug  5 07:26 anaconda-ks.cfg
+-rw-r--r--  1 root root 209504256 Aug  7 07:37 wedimg.tar
+[root@vm1 ~]#
+```
+
+
+### docker container export
+```sh
+[root@vm1 ~]# docker run -it --name myalpine alpine
+/ # ls -l
+total 8
+drwxr-xr-x    2 root     root          4096 Jul 11 17:29 bin
+drwxr-xr-x    5 root     root           360 Aug  7 11:40 dev
+drwxr-xr-x    1 root     root            66 Aug  7 11:39 etc
+drwxr-xr-x    2 root     root             6 Jul 11 17:29 home
+drwxr-xr-x    5 root     root           185 Jul 11 17:29 lib
+drwxr-xr-x    5 root     root            44 Jul 11 17:29 media
+drwxr-xr-x    2 root     root             6 Jul 11 17:29 mnt
+drwxr-xr-x    2 root     root             6 Jul 11 17:29 opt
+dr-xr-xr-x  121 root     root             0 Aug  7 11:40 proc
+drwx------    1 root     root            26 Aug  7 11:40 root
+drwxr-xr-x    2 root     root             6 Jul 11 17:29 run
+drwxr-xr-x    2 root     root          4096 Jul 11 17:29 sbin
+drwxr-xr-x    2 root     root             6 Jul 11 17:29 srv
+dr-xr-xr-x   13 root     root             0 Aug  7 11:40 sys
+drwxrwxrwt    2 root     root             6 Jul 11 17:29 tmp
+drwxr-xr-x    7 root     root            66 Jul 11 17:29 usr
+drwxr-xr-x   11 root     root           125 Jul 11 17:29 var
+/ # touch kt.ds
+/ # exit
+[root@vm1 ~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
+8bc8bfff8e51        alpine              "/bin/sh"           24 seconds ago      Exited (0) 4 seconds ago                       myalpine
+
+# container export
+[root@vm1 ~]# docker container export myalpine > myalpine.tar
+[root@vm1 ~]# ls -al
+total 210336
+dr-xr-x---.  4 root root       197 Aug  7 07:40 .
+dr-xr-xr-x. 17 root root       224 Aug  5 07:25 ..
+-rw-------.  1 root root      1417 Aug  5 07:26 anaconda-ks.cfg
+-rw-------.  1 root root      3805 Aug  6 09:05 .bash_history
+-rw-r--r--.  1 root root        18 Dec 28  2013 .bash_logout
+-rw-r--r--.  1 root root       176 Dec 28  2013 .bash_profile
+-rw-r--r--.  1 root root       176 Dec 28  2013 .bashrc
+-rw-r--r--.  1 root root       100 Dec 28  2013 .cshrc
+-rw-r--r--   1 root root   5847040 Aug  7 07:40 myalpine.tar
+drwxr-----.  3 root root        19 Aug  5 07:38 .pki
+drwx------   2 root root        25 Aug  5 08:44 .ssh
+-rw-r--r--.  1 root root       129 Dec 28  2013 .tcshrc
+-rw-r--r--   1 root root 209504256 Aug  7 07:37 wedimg.tar
+[root@vm1 ~]# scp myalpine.tar vm3:/root
+root@vm3's password:
+myalpine.tar  
+
+
+
+[root@vm3 ~]# ls -al | grep myalpine.tar
+-rw-r--r--   1 root root 5847040 Aug  7 07:41 myalpine.tar
+
+# docker image import
+[root@vm3 ~]# docker image import myalpine.tar myalpine
+sha256:266f7cfbfa3858ac8cb0ae8589ee3454e4bf5e8a2e35023c6ac9ad50b4b1b1ef
+[root@vm3 ~]# docker image ls
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+myalpine            latest              266f7cfbfa38        21 seconds ago      5.58MB
+wedimg              latest              efabe874109c        About an hour ago   202MB
+schema9/wedimg      latest              efabe874109c        About an hour ago   202MB
+mysql               latest              2151acc12881        2 weeks ago         445MB
+centos              latest              9f38484d220f        4 months ago        202MB
+[root@vm3 ~]# docker run -it myalpine /bin/sh
+/ #
+```
+
+
+
+# docker history
+
+```sh
+[root@vm3 ~]# docker pull mysql
+Using default tag: latest
+latest: Pulling from library/mysql
+0a4690c5d889: Pull complete
+98aa2fc6cbeb: Pull complete
+0777e6eb0e6f: Pull complete
+2464189c041c: Pull complete
+b45df9dc827d: Pull complete
+b42b00086160: Pull complete
+bb93567627c7: Pull complete
+bda91ab2ec35: Pull complete
+50b4c0c50b33: Pull complete
+70c2999bc788: Pull complete
+3cf3e568e51b: Pull complete
+c80d654aa77e: Pull complete
+Digest: sha256:b1b2c176a45f4ff6875d0d7461fe1fdd8606deb015b38b69545f72de97714efd
+Status: Downloaded newer image for mysql:latest
+docker.io/library/mysql:latest
+[root@vm3 ~]#
+
+[root@vm3 ~]# docker history mysql
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+2151acc12881        2 weeks ago         /bin/sh -c #(nop)  CMD ["mysqld"]               0B
+<missing>           2 weeks ago         /bin/sh -c #(nop)  EXPOSE 3306 33060            0B
+<missing>           2 weeks ago         /bin/sh -c #(nop)  ENTRYPOINT ["docker-entry…   0B
+<missing>           2 weeks ago         /bin/sh -c ln -s usr/local/bin/docker-entryp…   34B
+<missing>           2 weeks ago         /bin/sh -c #(nop) COPY file:1667e4be6bef3129…   6.53kB
+<missing>           2 weeks ago         /bin/sh -c #(nop) COPY dir:478f098f3681084f7…   1.22kB
+<missing>           2 weeks ago         /bin/sh -c #(nop)  VOLUME [/var/lib/mysql]      0B
+<missing>           2 weeks ago         /bin/sh -c {   echo mysql-community-server m…   330MB
+<missing>           2 weeks ago         /bin/sh -c echo "deb http://repo.mysql.com/a…   56B
+<missing>           2 weeks ago         /bin/sh -c #(nop)  ENV MYSQL_VERSION=8.0.17-…   0B
+<missing>           2 weeks ago         /bin/sh -c #(nop)  ENV MYSQL_MAJOR=8.0          0B
+<missing>           2 weeks ago         /bin/sh -c set -ex;  key='A4A9406876FCBD3C45…   27.8kB
+<missing>           2 weeks ago         /bin/sh -c apt-get update && apt-get install…   44.8MB
+<missing>           2 weeks ago         /bin/sh -c mkdir /docker-entrypoint-initdb.d    0B
+<missing>           2 weeks ago         /bin/sh -c set -x  && apt-get update && apt-…   4.44MB
+<missing>           2 weeks ago         /bin/sh -c #(nop)  ENV GOSU_VERSION=1.7         0B
+<missing>           2 weeks ago         /bin/sh -c apt-get update && apt-get install…   10.2MB
+<missing>           2 weeks ago         /bin/sh -c groupadd -r mysql && useradd -r -…   329kB
+<missing>           4 weeks ago         /bin/sh -c #(nop)  CMD ["bash"]                 0B
+<missing>           4 weeks ago         /bin/sh -c #(nop) ADD file:966bd7368f1e5a3e4…   55.3MB
+```
+
+
+# docker 환경설정 파일을 가지고 커스텀 이미지 생성하기
+```sh
+[root@vm3 ~]# docker rm $(docker ps -aq) -f
+2ba5646677cb
+
+# 강사님 azure 클라우드에서 Dockerfile 다운로드
+[root@vm3 ~]# wget http://down.cloudshell.kr/docker/Dockerfile
+--2019-08-07 07:52:56--  http://down.cloudshell.kr/docker/Dockerfile
+Resolving down.cloudshell.kr (down.cloudshell.kr)... 52.231.80.94
+Connecting to down.cloudshell.kr (down.cloudshell.kr)|52.231.80.94|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 309 [application/octet-stream]
+Saving to: ‘Dockerfile’
+
+100%[==============================================================================================>] 309         --.-K/s   in 0s
+
+2019-08-07 07:52:56 (31.2 MB/s) - ‘Dockerfile’ saved [309/309]
+
+[root@vm3 ~]# ls -l | grep Dockerfile
+-rw-r--r--  1 root root     309 Dec 20  2018 Dockerfile
+
+# Dockerfile 내용
+# 커스텀 명령어들 존재
+[root@vm3 ~]# cat Dockerfile
+FROM ubuntu:16.04
+MAINTAINER Yongshik Lee
+
+RUN apt-get update -y
+RUN apt-get install nginx -y
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+RUN chown -R www-data:www-data /var/lib/nginx
+
+VOLUME ["/data", "/etc/nginx/site-enabled", "/var/log/nginx"]
+
+WORKDIR /etc/nginx
+
+CMD ["nginx"]
+
+EXPOSE 80
+EXPOSE 443
+
+# docker build : 빌드
+# docker build -t [태그명] [경로]
+[root@vm3 ~]# docker build -t nginximg .
+Sending build context to Docker daemon  5.865MB
+Step 1/11 : FROM ubuntu:16.04
+16.04: Pulling from library/ubuntu
+f7277927d38a: Pull complete
+8d3eac894db4: Pull complete
+edf72af6d627: Pull complete
+3e4f86211d23: Pull complete
+Digest: sha256:97b54e5692c27072234ff958a7442dde4266af21e7b688e7fca5dc5acc8ed7d9
+Status: Downloaded newer image for ubuntu:16.04
+ ---> 5e13f8dd4c1a
+Step 2/11 : MAINTAINER Yongshik Lee
+ ---> Running in 90c6741179a7
+Removing intermediate container 90c6741179a7
+ ---> d546f5f97b00
+Step 3/11 : RUN apt-get update -y
+ ---> Running in a180ac1fe309
+Get:1 http://security.ubuntu.com/ubuntu xenial-security InRelease [109 kB]
+Get:2 http://archive.ubuntu.com/ubuntu xenial InRelease [247 kB]
+Get:3 http://security.ubuntu.com/ubuntu xenial-security/main amd64 Packages [908 kB]
+Get:4 http://archive.ubuntu.com/ubuntu xenial-updates InRelease [109 kB]
+Get:5 http://archive.ubuntu.com/ubuntu xenial-backports InRelease [107 kB]
+Get:6 http://archive.ubuntu.com/ubuntu xenial/main amd64 Packages [1558 kB]
+Get:7 http://security.ubuntu.com/ubuntu xenial-security/restricted amd64 Packages [12.7 kB]
+Get:8 http://security.ubuntu.com/ubuntu xenial-security/universe amd64 Packages [573 kB]
+Get:9 http://security.ubuntu.com/ubuntu xenial-security/multiverse amd64 Packages [6117 B]
+Get:10 http://archive.ubuntu.com/ubuntu xenial/restricted amd64 Packages [14.1 kB]
+Get:11 http://archive.ubuntu.com/ubuntu xenial/universe amd64 Packages [9827 kB]
+Get:12 http://archive.ubuntu.com/ubuntu xenial/multiverse amd64 Packages [176 kB]
+Get:13 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 Packages [1292 kB]
+Get:14 http://archive.ubuntu.com/ubuntu xenial-updates/restricted amd64 Packages [13.1 kB]
+Get:15 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 Packages [980 kB]
+Get:16 http://archive.ubuntu.com/ubuntu xenial-updates/multiverse amd64 Packages [19.1 kB]
+Get:17 http://archive.ubuntu.com/ubuntu xenial-backports/main amd64 Packages [7942 B]
+Get:18 http://archive.ubuntu.com/ubuntu xenial-backports/universe amd64 Packages [8532 B]
+Fetched 16.0 MB in 1min 3s (251 kB/s)
+Reading package lists...
+Removing intermediate container a180ac1fe309
+ ---> 6cbb15b5ccec
+Step 4/11 : RUN apt-get install nginx -y
+ ---> Running in 8c97d9242be7
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  fontconfig-config fonts-dejavu-core geoip-database libexpat1 libfontconfig1
+  libfreetype6 libgd3 libgeoip1 libicu55 libjbig0 libjpeg-turbo8 libjpeg8
+  libpng12-0 libssl1.0.0 libtiff5 libvpx3 libx11-6 libx11-data libxau6 libxcb1
+  libxdmcp6 libxml2 libxpm4 libxslt1.1 nginx-common nginx-core sgml-base ucf
+  xml-core
+Suggested packages:
+  libgd-tools geoip-bin fcgiwrap nginx-doc ssl-cert sgml-base-doc debhelper
+The following NEW packages will be installed:
+  fontconfig-config fonts-dejavu-core geoip-database libexpat1 libfontconfig1
+  libfreetype6 libgd3 libgeoip1 libicu55 libjbig0 libjpeg-turbo8 libjpeg8
+  libpng12-0 libssl1.0.0 libtiff5 libvpx3 libx11-6 libx11-data libxau6 libxcb1
+  libxdmcp6 libxml2 libxpm4 libxslt1.1 nginx nginx-common nginx-core sgml-base
+  ucf xml-core
+0 upgraded, 30 newly installed, 0 to remove and 0 not upgraded.
+Need to get 15.5 MB of archives.
+After this operation, 57.4 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu xenial/main amd64 libxau6 amd64 1:1.0.8-1 [8376 B]
+Get:2 http://archive.ubuntu.com/ubuntu xenial/main amd64 sgml-base all 1.26+nmu4ubuntu1 [12.5 kB]
+Get:3 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libjpeg-turbo8 amd64 1.4.2-0ubuntu3.1 [111 kB]
+Get:4 http://archive.ubuntu.com/ubuntu xenial/main amd64 libjbig0 amd64 2.1-3.1 [26.6 kB]
+Get:5 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libexpat1 amd64 2.1.0-7ubuntu0.16.04.4 [71.4 kB]
+Get:6 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpng12-0 amd64 1.2.54-1ubuntu1.1 [116 kB]
+Get:7 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libssl1.0.0 amd64 1.0.2g-1ubuntu4.15 [1084 kB]
+Get:8 http://archive.ubuntu.com/ubuntu xenial/main amd64 ucf all 3.0036 [52.9 kB]
+Get:9 http://archive.ubuntu.com/ubuntu xenial/main amd64 geoip-database all 20160408-1 [1678 kB]
+Get:10 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgeoip1 amd64 1.6.9-1 [70.1 kB]
+Get:11 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libicu55 amd64 55.1-7ubuntu0.4 [7646 kB]
+Get:12 http://archive.ubuntu.com/ubuntu xenial/main amd64 libxdmcp6 amd64 1:1.1.2-1.1 [11.0 kB]
+Get:13 http://archive.ubuntu.com/ubuntu xenial/main amd64 libxcb1 amd64 1.11.1-1ubuntu1 [40.0 kB]
+Get:14 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libx11-data all 2:1.6.3-1ubuntu2.1 [113 kB]
+Get:15 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libx11-6 amd64 2:1.6.3-1ubuntu2.1 [570 kB]
+Get:16 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libxml2 amd64 2.9.3+dfsg1-1ubuntu0.6 [697 kB]
+Get:17 http://archive.ubuntu.com/ubuntu xenial/main amd64 xml-core all 0.13+nmu2 [23.3 kB]
+Get:18 http://archive.ubuntu.com/ubuntu xenial/main amd64 fonts-dejavu-core all 2.35-1 [1039 kB]
+Get:19 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 fontconfig-config all 2.11.94-0ubuntu1.1 [49.9 kB]
+Get:20 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libfreetype6 amd64 2.6.1-0.1ubuntu2.3 [316 kB]
+Get:21 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libfontconfig1 amd64 2.11.94-0ubuntu1.1 [131 kB]
+Get:22 http://archive.ubuntu.com/ubuntu xenial/main amd64 libjpeg8 amd64 8c-2ubuntu8 [2194 B]
+Get:23 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libtiff5 amd64 4.0.6-1ubuntu0.6 [149 kB]
+Get:24 http://archive.ubuntu.com/ubuntu xenial/main amd64 libvpx3 amd64 1.5.0-2ubuntu1 [732 kB]
+Get:25 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libxpm4 amd64 1:3.5.11-1ubuntu0.16.04.1 [33.8 kB]
+Get:26 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgd3 amd64 2.1.1-4ubuntu0.16.04.11 [126 kB]
+Get:27 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libxslt1.1 amd64 1.1.28-2.1ubuntu0.2 [146 kB]
+Get:28 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 nginx-common all 1.10.3-0ubuntu0.16.04.3 [26.7 kB]
+Get:29 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 nginx-core amd64 1.10.3-0ubuntu0.16.04.3 [429 kB]
+Get:30 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 nginx all 1.10.3-0ubuntu0.16.04.3 [3506 B]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 15.5 MB in 1min 17s (201 kB/s)
+Selecting previously unselected package libxau6:amd64.
+(Reading database ... 4777 files and directories currently installed.)
+Preparing to unpack .../libxau6_1%3a1.0.8-1_amd64.deb ...
+Unpacking libxau6:amd64 (1:1.0.8-1) ...
+Selecting previously unselected package sgml-base.
+Preparing to unpack .../sgml-base_1.26+nmu4ubuntu1_all.deb ...
+Unpacking sgml-base (1.26+nmu4ubuntu1) ...
+Selecting previously unselected package libjpeg-turbo8:amd64.
+Preparing to unpack .../libjpeg-turbo8_1.4.2-0ubuntu3.1_amd64.deb ...
+Unpacking libjpeg-turbo8:amd64 (1.4.2-0ubuntu3.1) ...
+Selecting previously unselected package libjbig0:amd64.
+Preparing to unpack .../libjbig0_2.1-3.1_amd64.deb ...
+Unpacking libjbig0:amd64 (2.1-3.1) ...
+Selecting previously unselected package libexpat1:amd64.
+Preparing to unpack .../libexpat1_2.1.0-7ubuntu0.16.04.4_amd64.deb ...
+Unpacking libexpat1:amd64 (2.1.0-7ubuntu0.16.04.4) ...
+Selecting previously unselected package libpng12-0:amd64.
+Preparing to unpack .../libpng12-0_1.2.54-1ubuntu1.1_amd64.deb ...
+Unpacking libpng12-0:amd64 (1.2.54-1ubuntu1.1) ...
+Selecting previously unselected package libssl1.0.0:amd64.
+Preparing to unpack .../libssl1.0.0_1.0.2g-1ubuntu4.15_amd64.deb ...
+Unpacking libssl1.0.0:amd64 (1.0.2g-1ubuntu4.15) ...
+Selecting previously unselected package ucf.
+Preparing to unpack .../archives/ucf_3.0036_all.deb ...
+Moving old data out of the way
+Unpacking ucf (3.0036) ...
+Selecting previously unselected package geoip-database.
+Preparing to unpack .../geoip-database_20160408-1_all.deb ...
+Unpacking geoip-database (20160408-1) ...
+Selecting previously unselected package libgeoip1:amd64.
+Preparing to unpack .../libgeoip1_1.6.9-1_amd64.deb ...
+Unpacking libgeoip1:amd64 (1.6.9-1) ...
+Selecting previously unselected package libicu55:amd64.
+Preparing to unpack .../libicu55_55.1-7ubuntu0.4_amd64.deb ...
+Unpacking libicu55:amd64 (55.1-7ubuntu0.4) ...
+Selecting previously unselected package libxdmcp6:amd64.
+Preparing to unpack .../libxdmcp6_1%3a1.1.2-1.1_amd64.deb ...
+Unpacking libxdmcp6:amd64 (1:1.1.2-1.1) ...
+Selecting previously unselected package libxcb1:amd64.
+Preparing to unpack .../libxcb1_1.11.1-1ubuntu1_amd64.deb ...
+Unpacking libxcb1:amd64 (1.11.1-1ubuntu1) ...
+Selecting previously unselected package libx11-data.
+Preparing to unpack .../libx11-data_2%3a1.6.3-1ubuntu2.1_all.deb ...
+Unpacking libx11-data (2:1.6.3-1ubuntu2.1) ...
+Selecting previously unselected package libx11-6:amd64.
+Preparing to unpack .../libx11-6_2%3a1.6.3-1ubuntu2.1_amd64.deb ...
+Unpacking libx11-6:amd64 (2:1.6.3-1ubuntu2.1) ...
+Selecting previously unselected package libxml2:amd64.
+Preparing to unpack .../libxml2_2.9.3+dfsg1-1ubuntu0.6_amd64.deb ...
+Unpacking libxml2:amd64 (2.9.3+dfsg1-1ubuntu0.6) ...
+Selecting previously unselected package xml-core.
+Preparing to unpack .../xml-core_0.13+nmu2_all.deb ...
+Unpacking xml-core (0.13+nmu2) ...
+Selecting previously unselected package fonts-dejavu-core.
+Preparing to unpack .../fonts-dejavu-core_2.35-1_all.deb ...
+Unpacking fonts-dejavu-core (2.35-1) ...
+Selecting previously unselected package fontconfig-config.
+Preparing to unpack .../fontconfig-config_2.11.94-0ubuntu1.1_all.deb ...
+Unpacking fontconfig-config (2.11.94-0ubuntu1.1) ...
+Selecting previously unselected package libfreetype6:amd64.
+Preparing to unpack .../libfreetype6_2.6.1-0.1ubuntu2.3_amd64.deb ...
+Unpacking libfreetype6:amd64 (2.6.1-0.1ubuntu2.3) ...
+Selecting previously unselected package libfontconfig1:amd64.
+Preparing to unpack .../libfontconfig1_2.11.94-0ubuntu1.1_amd64.deb ...
+Unpacking libfontconfig1:amd64 (2.11.94-0ubuntu1.1) ...
+Selecting previously unselected package libjpeg8:amd64.
+Preparing to unpack .../libjpeg8_8c-2ubuntu8_amd64.deb ...
+Unpacking libjpeg8:amd64 (8c-2ubuntu8) ...
+Selecting previously unselected package libtiff5:amd64.
+Preparing to unpack .../libtiff5_4.0.6-1ubuntu0.6_amd64.deb ...
+Unpacking libtiff5:amd64 (4.0.6-1ubuntu0.6) ...
+Selecting previously unselected package libvpx3:amd64.
+Preparing to unpack .../libvpx3_1.5.0-2ubuntu1_amd64.deb ...
+Unpacking libvpx3:amd64 (1.5.0-2ubuntu1) ...
+Selecting previously unselected package libxpm4:amd64.
+Preparing to unpack .../libxpm4_1%3a3.5.11-1ubuntu0.16.04.1_amd64.deb ...
+Unpacking libxpm4:amd64 (1:3.5.11-1ubuntu0.16.04.1) ...
+Selecting previously unselected package libgd3:amd64.
+Preparing to unpack .../libgd3_2.1.1-4ubuntu0.16.04.11_amd64.deb ...
+Unpacking libgd3:amd64 (2.1.1-4ubuntu0.16.04.11) ...
+Selecting previously unselected package libxslt1.1:amd64.
+Preparing to unpack .../libxslt1.1_1.1.28-2.1ubuntu0.2_amd64.deb ...
+Unpacking libxslt1.1:amd64 (1.1.28-2.1ubuntu0.2) ...
+Selecting previously unselected package nginx-common.
+Preparing to unpack .../nginx-common_1.10.3-0ubuntu0.16.04.3_all.deb ...
+Unpacking nginx-common (1.10.3-0ubuntu0.16.04.3) ...
+Selecting previously unselected package nginx-core.
+Preparing to unpack .../nginx-core_1.10.3-0ubuntu0.16.04.3_amd64.deb ...
+Unpacking nginx-core (1.10.3-0ubuntu0.16.04.3) ...
+Selecting previously unselected package nginx.
+Preparing to unpack .../nginx_1.10.3-0ubuntu0.16.04.3_all.deb ...
+Unpacking nginx (1.10.3-0ubuntu0.16.04.3) ...
+Processing triggers for libc-bin (2.23-0ubuntu11) ...
+Processing triggers for systemd (229-4ubuntu21.22) ...
+Setting up libxau6:amd64 (1:1.0.8-1) ...
+Setting up sgml-base (1.26+nmu4ubuntu1) ...
+Setting up libjpeg-turbo8:amd64 (1.4.2-0ubuntu3.1) ...
+Setting up libjbig0:amd64 (2.1-3.1) ...
+Setting up libexpat1:amd64 (2.1.0-7ubuntu0.16.04.4) ...
+Setting up libpng12-0:amd64 (1.2.54-1ubuntu1.1) ...
+Setting up libssl1.0.0:amd64 (1.0.2g-1ubuntu4.15) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.22.1 /usr/local/share/perl/5.22.1 /usr/lib/x86_64-linux-gnu/perl5/5.22 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl/5.22 /usr/share/perl/5.22 /usr/local/lib/site_perl /usr/lib/x86_64-linux-gnu/perl-base .) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+debconf: falling back to frontend: Teletype
+Setting up ucf (3.0036) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.22.1 /usr/local/share/perl/5.22.1 /usr/lib/x86_64-linux-gnu/perl5/5.22 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl/5.22 /usr/share/perl/5.22 /usr/local/lib/site_perl /usr/lib/x86_64-linux-gnu/perl-base .) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+debconf: falling back to frontend: Teletype
+Setting up geoip-database (20160408-1) ...
+Setting up libgeoip1:amd64 (1.6.9-1) ...
+Setting up libicu55:amd64 (55.1-7ubuntu0.4) ...
+Setting up libxdmcp6:amd64 (1:1.1.2-1.1) ...
+Setting up libxcb1:amd64 (1.11.1-1ubuntu1) ...
+Setting up libx11-data (2:1.6.3-1ubuntu2.1) ...
+Setting up libx11-6:amd64 (2:1.6.3-1ubuntu2.1) ...
+Setting up libxml2:amd64 (2.9.3+dfsg1-1ubuntu0.6) ...
+Setting up xml-core (0.13+nmu2) ...
+Setting up fonts-dejavu-core (2.35-1) ...
+Setting up fontconfig-config (2.11.94-0ubuntu1.1) ...
+Setting up libfreetype6:amd64 (2.6.1-0.1ubuntu2.3) ...
+Setting up libfontconfig1:amd64 (2.11.94-0ubuntu1.1) ...
+Setting up libjpeg8:amd64 (8c-2ubuntu8) ...
+Setting up libtiff5:amd64 (4.0.6-1ubuntu0.6) ...
+Setting up libvpx3:amd64 (1.5.0-2ubuntu1) ...
+Setting up libxpm4:amd64 (1:3.5.11-1ubuntu0.16.04.1) ...
+Setting up libgd3:amd64 (2.1.1-4ubuntu0.16.04.11) ...
+Setting up libxslt1.1:amd64 (1.1.28-2.1ubuntu0.2) ...
+Setting up nginx-common (1.10.3-0ubuntu0.16.04.3) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.22.1 /usr/local/share/perl/5.22.1 /usr/lib/x86_64-linux-gnu/perl5/5.22 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl/5.22 /usr/share/perl/5.22 /usr/local/lib/site_perl /usr/lib/x86_64-linux-gnu/perl-base .) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+debconf: falling back to frontend: Teletype
+Setting up nginx-core (1.10.3-0ubuntu0.16.04.3) ...
+invoke-rc.d: could not determine current runlevel
+invoke-rc.d: policy-rc.d denied execution of start.
+Setting up nginx (1.10.3-0ubuntu0.16.04.3) ...
+Processing triggers for libc-bin (2.23-0ubuntu11) ...
+Processing triggers for sgml-base (1.26+nmu4ubuntu1) ...
+Processing triggers for systemd (229-4ubuntu21.22) ...
+Removing intermediate container 8c97d9242be7
+ ---> de0e46169c0b
+Step 5/11 : RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+ ---> Running in 01b674d39688
+Removing intermediate container 01b674d39688
+ ---> b8abbffe21b6
+Step 6/11 : RUN chown -R www-data:www-data /var/lib/nginx
+ ---> Running in 6617e53a8644
+Removing intermediate container 6617e53a8644
+ ---> f8de4f1d20c5
+Step 7/11 : VOLUME ["/data", "/etc/nginx/site-enabled", "/var/log/nginx"]
+ ---> Running in aa2e4cd59ce6
+Removing intermediate container aa2e4cd59ce6
+ ---> 395ca041293e
+Step 8/11 : WORKDIR /etc/nginx
+ ---> Running in 5ada1c6b661a
+Removing intermediate container 5ada1c6b661a
+ ---> a0b802e012e0
+Step 9/11 : CMD ["nginx"]
+ ---> Running in 9910d770ba08
+Removing intermediate container 9910d770ba08
+ ---> 3021933d1bf4
+Step 10/11 : EXPOSE 80
+ ---> Running in ac95ec595758
+Removing intermediate container ac95ec595758
+ ---> 10cfee00911f
+Step 11/11 : EXPOSE 443
+ ---> Running in 44210e15d0fb
+Removing intermediate container 44210e15d0fb
+ ---> ea1bd4e48306
+Successfully built ea1bd4e48306
+Successfully tagged nginximg:latest
+[root@vm3 ~]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+nginximg            latest              ea1bd4e48306        47 seconds ago      202MB
+myalpine            latest              266f7cfbfa38        6 minutes ago       5.58MB
+wedimg              latest              efabe874109c        About an hour ago   202MB
+schema9/wedimg      latest              efabe874109c        About an hour ago   202MB
+ubuntu              16.04               5e13f8dd4c1a        2 weeks ago         120MB
+mysql               latest              2151acc12881        2 weeks ago         445MB
+centos              latest              9f38484d220f        4 months ago        202MB
+
+```
+
+
+
+```sh
+# index 파일 생성
+[root@vm1 ~]# mkdir -p /lab/www
+[root@vm1 ~]# touch /lab/www/index.html
+[root@vm1 ~]# echo "Hi, This is shema9" > /lab/www/index.html
+
+
+[root@vm1 ~]# docker run -d -p 80:80 schema9/nginx100img
+43134ba819a11cd32cfa55d31dee72c2a54eda2631caaf3670f64c3a3e19c65b
+
+# index.html 경로 확인
+[root@vm1 ~]# docker exec -it 431 /bin/bash
+root@43134ba819a1:/etc/nginx# finc / -name "index.html"
+bash: finc: command not found
+root@43134ba819a1:/etc/nginx# find / -name "index.html"
+/usr/share/doc/adduser/examples/adduser.local.conf.examples/skel.other/index.html
+/usr/share/nginx/html/index.html
+
+[root@vm1 ~]# docker rm $(docker ps -aq) -f
+43134ba819a1
+
+# docker run
+# -v 옵션 : 컨테이너 바깥의 volumne 사용
+# 데이터는 호스트 컴퓨터의 볼륨을 사용하는 것을 권장함
+# 컨테이너가 죽더라도 문제가 없기 위해서...
+[root@vm1 www]# docker run -d -p 80:80 -v /lab/www:/var/www/html schema9/nginx100img
+174952d754bfef50d1317868dcf5e3b5dcbb730b52dc74e62f2ea2cf26d55c84
+```
+
+
+
+---------------------------------------------------------------
+
+
+## docker volume
+
+
+```sh
+# volume 사용하기
+[root@vm1 www]# docker run -it --name con1 -v /data centos
+[root@1139a80902ce /]# cd data
+[root@1139a80902ce data]# ls -l
+total 0
+[root@1139a80902ce data]# touch yslee.txt
+[root@1139a80902ce data]# ls -l
+total 0
+-rw-r--r-- 1 root root 0 Aug  7 12:35 yslee.txt
+[root@1139a80902ce data]# [root@vm1 www]#
+[root@vm1 www]# docker ps
+CONTAINER ID        IMAGE                 COMMAND             CREATED             STATUS              PORTS                         NAMES
+1139a80902ce        centos                "/bin/bash"         20 seconds ago      Up 19 seconds                                     con1
+174952d754bf        schema9/nginx100img   "nginx"             20 minutes ago      Up 20 minutes       0.0.0.0:80->80/tcp, 443/tcp   heuristic_allen
+[root@vm1 www]# find /var/lib/docker -name "yslee.txt"
+/var/lib/docker/volumes/f44f162b98d2fdd87dc50cc2f16634ef16ab24bd6d4524c9061230265fe2b9e1/_data/yslee.txt
+[root@vm1 www]#
+[root@vm1 www]#
+[root@vm1 www]#
+[root@vm1 www]# cd /var/lib/docker/volumes/f44f162b98d2fdd87dc50cc2f16634ef16ab24bd6d4524c9061230265fe2b9e1/_data/yslee.txt
+-bash: cd: /var/lib/docker/volumes/f44f162b98d2fdd87dc50cc2f16634ef16ab24bd6d4524c9061230265fe2b9e1/_data/yslee.txt: Not a directory
+[root@vm1 www]#
+[root@vm1 www]# cd /var/lib/docker/volumes/f44f162b98d2fdd87dc50cc2f16634ef16ab24bd6d4524c9061230265fe2b9e1/_data/yslee.txt
+-bash: cd: /var/lib/docker/volumes/f44f162b98d2fdd87dc50cc2f16634ef16ab24bd6d4524c9061230265fe2b9e1/_data/yslee.txt: Not a directory
+[root@vm1 www]# cd /var/lib/docker/volumes/f44f162b98d2fdd87dc50cc2f16634ef16ab24bd6d4524c9061230265fe2b9e1/_data
+[root@vm1 _data]# ls -al
+total 0
+drwxr-xr-x 2 root root 23 Aug  7 08:35 .
+drwxr-xr-x 3 root root 19 Aug  7 08:34 ..
+-rw-r--r-- 1 root root  0 Aug  7 08:35 yslee.txt
+[root@vm1 _data]# echo "KTDS is far from my comany" > test.txt
+[root@vm1 _data]# docker exec -it con1 /bin/bash
+[root@1139a80902ce /]# ls -al
+total 12
+drwxr-xr-x   1 root root    18 Aug  7 12:34 .
+drwxr-xr-x   1 root root    18 Aug  7 12:34 ..
+-rwxr-xr-x   1 root root     0 Aug  7 12:34 .dockerenv
+-rw-r--r--   1 root root 12082 Mar  5 17:36 anaconda-post.log
+lrwxrwxrwx   1 root root     7 Mar  5 17:34 bin -> usr/bin
+drwxr-xr-x   2 root root    39 Aug  7 12:36 data
+drwxr-xr-x   5 root root   360 Aug  7 12:34 dev
+drwxr-xr-x   1 root root    66 Aug  7 12:34 etc
+drwxr-xr-x   2 root root     6 Apr 11  2018 home
+lrwxrwxrwx   1 root root     7 Mar  5 17:34 lib -> usr/lib
+lrwxrwxrwx   1 root root     9 Mar  5 17:34 lib64 -> usr/lib64
+drwxr-xr-x   2 root root     6 Apr 11  2018 media
+drwxr-xr-x   2 root root     6 Apr 11  2018 mnt
+drwxr-xr-x   2 root root     6 Apr 11  2018 opt
+dr-xr-xr-x 127 root root     0 Aug  7 12:34 proc
+dr-xr-x---   2 root root   114 Mar  5 17:36 root
+drwxr-xr-x  11 root root   148 Mar  5 17:36 run
+lrwxrwxrwx   1 root root     8 Mar  5 17:34 sbin -> usr/sbin
+drwxr-xr-x   2 root root     6 Apr 11  2018 srv
+dr-xr-xr-x  13 root root     0 Aug  7 12:34 sys
+drwxrwxrwt   7 root root   132 Mar  5 17:36 tmp
+drwxr-xr-x  13 root root   155 Mar  5 17:34 usr
+drwxr-xr-x  18 root root   238 Mar  5 17:34 var
+[root@1139a80902ce /]# ls -al | grep txt
+[root@1139a80902ce /]# cd d
+data/ dev/
+[root@1139a80902ce /]# cd data
+[root@1139a80902ce data]# ls
+test.txt  yslee.txt
+[root@1139a80902ce data]# cat test.txt
+KTDS is far from my comany
+
+
+
+
+# docker volumne create [볼륨명]
+# 볼륨 생성
+[root@vm1 _data]# docker volume create topdata
+topdata
+
+# 로컬에서 볼륨 경로 찾기
+[root@vm1 _data]# find / -name "topdata"
+/var/lib/docker/volumes/topdata
+[root@vm1 _data]# docker volume create lowdata
+lowdata
+[root@vm1 _data]# find /-name "lowdata"
+find: ‘/-name’: No such file or directory
+find: ‘lowdata’: No such file or directory
+[root@vm1 _data]# find / -name "lowdata"
+/var/lib/docker/volumes/lowdata
+
+# 로컬에 생성된 볼륨 경로 사용
+[root@vm1 _data]# docker run -it --name con100 -v lowdata:/data centos
+[root@9ad0d2a9f4e8 /]# cd data
+[root@9ad0d2a9f4e8 data]# touch lowdata_test.txt
+[root@9ad0d2a9f4e8 data]# exit
+exit
+[root@vm1 _data]#
+[root@vm1 _data]# cd /var/lib/docker/volumes/lowdata
+[root@vm1 lowdata]# ls -al
+total 4
+drwxr-xr-x  3 root root   19 Aug  7 08:39 .
+drwx------ 13 root root 4096 Aug  7 08:39 ..
+drwxr-xr-x  2 root root   30 Aug  7 08:41 _data
+[root@vm1 lowdata]# cd _data
+[root@vm1 _data]# ls
+lowdata_test.txt
+[root@vm1 _data]# docker rm $(docker ps -aq) -f
+9ad0d2a9f4e8
+1139a80902ce
+174952d754bf
+
+
+
+
+[root@vm1 _data]# docker pull httpd:2.4
+2.4: Pulling from library/httpd
+Digest: sha256:dc4c86bc90593c6e4c5b06872a7a363fc7d4eec99c5d6bfac881f7371adcb2c4
+Status: Downloaded newer image for httpd:2.4
+docker.io/library/httpd:2.4
+[root@vm1 ~]# pwd
+/root
+
+# docker volumne ls : 볼륨 조회
+[root@vm1 ~]# docker volume ls
+DRIVER              VOLUME NAME
+local               22eb905dd275f5b605b4ca5ba5d3ba26aa74b61c5667d9248dcadf9e5c44f45b
+local               95b6bb3c15d9acc7bee4563207b4f1c2c969b8aa22234d94128e06755be8740e
+local               501e09e8e69bc63ed20e803c1d7ee744e7f440fd9ed530054a0fb48fd1d4327c
+local               683d4dec100540768dcd7b482541c5e9297a66cfb7ffeb42870909b407709cc8
+local               4688fe45ea550d6cfe55b369d31c57da1b65c019e6459d6c7a86e592bd8352fd
+local               c12ed1ae9116b73878dbd71363ef09b1285adf4b3cdc4ffd7c67ef2be11e7367
+local               c96064fd253c5c71fa395aa030c6918c0d4a4b2aa5ac1cffb8eb433c24e2ddea
+local               f44f162b98d2fdd87dc50cc2f16634ef16ab24bd6d4524c9061230265fe2b9e1
+local               fbbaff7ceb2bbb412ab0e03f202fbd22d7897d0efe357efcfde9edbff0d58bf5
+local               fcead19249d323279c49f6471b6d296b2ee8a843fa2606b8d382d061525ace9c
+local               lowdata
+local               topdata
+[root@vm1 ~]# find / -name "lowdata"
+/var/lib/docker/volumes/lowdata
+[root@vm1 ~]#
+[root@vm1 ~]# cd
+[root@vm1 ~]# cd /var/lib/docker/volumes/lowdata
+[root@vm1 lowdata]# cd _data/
+[root@vm1 _data]# ls
+lowdata_test.txt
+
+# index.html 파일 생성
+[root@vm1 _data]# vi index.html
+
+# httpd:2.4 실행시 볼륨 사용
+# 로컬의 /var/lib/docker/volumes/lowdata 볼륨 사용
+[root@vm1 _data]# docker run -dit --name myweb -p 80:80 -v lowdata:/usr/local/apache2/htdocs/ httpd:2.4
+97259e1519da752835a0c7ed3dd6258e5b7a1ce58068c18d6e124f9af87026dd
+```
+
+* 다양한 볼륨을 사용할 수 있다
+NFS server
+Azure File Storage
+
+
+
+### docker image 삭제
+
+```sh
+# 실행중인 컨테이너 모두 강제 종료
+[root@vm2 ~]# docker rm $(docker ps -aq) -f
+8848e4b8014f
+b8c6e5583120
+5d31f5f8b3e8
+
+# 이미지ㅣ 모두 삭제 (1)
+# docker rmi $(docker images -q)
+[root@vm2 ~]# docker images
+REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE
+schema9/wedimg              latest              efabe874109c        2 hours ago         202MB
+ysleeimg                    latest              7326f31e4370        24 hours ago        313MB
+ubuntu                      latest              3556258649b2        2 weeks ago         64.2MB
+alpine                      latest              b7b28af77ffe        3 weeks ago         5.58MB
+centos                      latest              9f38484d220f        4 months ago        202MB
+pengbai/docker-supermario   latest              49beaba1c5cc        13 months ago       686MB
+[root@vm2 ~]# docker rmi $(docker images -q)
+[root@vm2 ~]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+
+# 이미지 모두 삭제 (2)
+# docker system prune -a
+[root@vm3 ~]# docker images
+REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
+schema9/nginx100img   latest              ea1bd4e48306        About an hour ago   202MB
+myalpine              latest              266f7cfbfa38        About an hour ago   5.58MB
+schema9/wedimg        latest              efabe874109c        2 hours ago         202MB
+ubuntu                16.04               5e13f8dd4c1a        2 weeks ago         120MB
+mysql                 latest              2151acc12881        2 weeks ago         445MB
+centos                latest              9f38484d220f        4 months ago        202MB
+[root@vm3 ~]# docker system prune -a
+WARNING! This will remove:
+  - all stopped containers
+  - all networks not used by at least one container
+  - all images without at least one container associated to them
+  - all build cache
+
+Are you sure you want to continue? [y/N] y
+Deleted Images:
+...
+Total reclaimed space: 854.1MB
+[root@vm3 ~]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+```
+
+
+
+### Dockerfile 명령어
+
+RUN
+CMD
+ENTRYPOINT
+
+
+
